@@ -31,10 +31,23 @@ public class MQConsumer {
                     body) throws IOException {
                 String message = new String(body, "UTF-8");
                 System.out.println("consume message: " + message);
-            }
-        };
-        // 指定消费队列
-        channel.basicConsume(QUEUE_NAME, true, consumer);
+
+                // 回复ack包，如果不回复，消息不会在服务器删除
+                channel.basicAck(envelope.getDeliveryTag(), false);
+                // 拒绝消息，服务器会删除该消息
+                // channel.basicReject();
+                // 拒绝消息，服务器会重新分配该消息
+                // channel.basicNack();
+            }};
+        // 为channel声明一个消费者，服务器会推送消息
+        // 第一个参数：队列名
+        // 第二个参数：是否主动发送ack包，不发送ack消息会持续在服务端保存，直到收到ack，true自动ack，false手动ack
+        // 第三个参数：消费者
+        channel.basicConsume(QUEUE_NAME, false, consumer);
+        // 使用该函数可以主动取服务器检索是否有新的消息，而不是等服务器推送
+        // channel.basicGet();
+
+
 
         // // 创建队列消费者
         // QueueingConsumer consumer = new QueueingConsumer(channel);

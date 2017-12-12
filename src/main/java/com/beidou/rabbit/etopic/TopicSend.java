@@ -6,6 +6,12 @@ import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 
 /**
+ * topic exchange
+ *
+ * 与direct模式有类似之处，都使用routing key作为路由，
+ * 不同之处在于direct模式只能指定固定的字符串，而topic可以指定一个字符串模式
+ * #匹配若干个单词，*匹配一个单词
+ *
  * @author wangjinjie
  * @create 2017-12-12 22:26
  */

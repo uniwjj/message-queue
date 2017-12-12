@@ -9,6 +9,9 @@ import com.rabbitmq.client.ConnectionFactory;
  * 扇出交换机，只有消费者先运行才能收到消息
  * 发布订阅模式
  *
+ * 广播给所有队列，接收方也必须通过fanout交换机获取消息,所有连接到该交换机的consumer均可获取消息，
+ * 如果producer在发布消息时没有consumer在监听，消息将被丢弃
+ *
  * @author wangjinjie
  * @create 2017-12-12 21:29
  */

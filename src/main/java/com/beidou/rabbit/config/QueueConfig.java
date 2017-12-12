@@ -8,7 +8,7 @@ public interface QueueConfig {
     /**
      * 队列IP地址
      */
-    String QUEUE_IP = "10.240.193.118";
+    String QUEUE_IP = "192.168.1.3";
 
     /**
      * 队列端口号
