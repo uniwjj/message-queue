@@ -1,5 +1,6 @@
 package com.beidou.rabbit.edefault;
 
+import com.beidou.rabbit.config.QueueConfig;
 import com.rabbitmq.client.*;
 import java.io.IOException;
 
@@ -9,18 +10,14 @@ import java.io.IOException;
  */
 public class MQConsumer {
     private final static String QUEUE_NAME = "queue.default";
-    private final static String QUEUE_IP = "10.240.193.118";
-    private final static int QUEUE_PORT = 5672;
-    private final static String QUEUE_USER = "ginger";
-    private final static String QUEUE_PWD = "ginger";
 
     public static void main(String[] argv) throws Exception {
         //打开连接和创建频道，与发送端一样
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost(QUEUE_IP);
-        factory.setPort(QUEUE_PORT);
-        factory.setUsername(QUEUE_USER);
-        factory.setPassword(QUEUE_PWD);
+        factory.setHost(QueueConfig.QUEUE_IP);
+        factory.setPort(QueueConfig.QUEUE_PORT);
+        factory.setUsername(QueueConfig.QUEUE_USER);
+        factory.setPassword(QueueConfig.QUEUE_PWD);
 
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();

@@ -1,5 +1,6 @@
 package com.beidou.rabbit.etopic;
 
+import com.beidou.rabbit.config.QueueConfig;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -9,19 +10,14 @@ import com.rabbitmq.client.ConnectionFactory;
  * @create 2017-12-12 22:26
  */
 public class TopicSend {
-    private final static String QUEUE_IP = "10.240.193.118";
-    private final static int QUEUE_PORT = 5672;
-    private final static String QUEUE_USER = "ginger";
-    private final static String QUEUE_PWD = "ginger";
-
     private static final String EXCHANGE_NAME = "topic_logs";
 
     public static void main(String[] args) throws Exception {
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost(QUEUE_IP);
-        factory.setPort(QUEUE_PORT);
-        factory.setUsername(QUEUE_USER);
-        factory.setPassword(QUEUE_PWD);
+        factory.setHost(QueueConfig.QUEUE_IP);
+        factory.setPort(QueueConfig.QUEUE_PORT);
+        factory.setUsername(QueueConfig.QUEUE_USER);
+        factory.setPassword(QueueConfig.QUEUE_PWD);
 
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
