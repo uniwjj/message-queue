@@ -6,7 +6,7 @@ import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.MessageProperties;
 
 /**
- * 直接方式（默认）
+ * 直接方式（默认），使用匿名交换机""
  * 消息直接发送到consumer绑定的队列，当有多个consumer绑定同一个队列时，多个消费者轮询消费消息
  * 消息在被用户消费前不会都是
  * @author ginger
@@ -28,10 +28,12 @@ public class MQProducer {
 
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
-        // 指定一个队列
-        // channel.queueDeclare(QUEUE_NAME, false, false, false, null);
-        // 如QUEUE_NAME是一个transient的queue，第二个参数必须是false；重启rabbit后QUEUE_NAME会被删除掉
-        // 如QUEUE_NAME是一个durability的queue，第二个参数必须是true；重启rabbit后QUEUE_NAME不会被删除掉
+        // 指定一个队列，已经定义的队列再次定义无效，幂次原理，RabbitMQ重启队列也不会消失
+        // 第一个参数为队列名称
+        // 第二个参数为标明队列是否持久化，false为瞬时队列，true为持久化队列
+        // 第三个参数为标识是否为独占队列，false非独占队列，true独占队列
+        // 第四个参数为标识队列不用时是否删除，false不删除，true删除
+        // 第五个参数为其他参数
         channel.queueDeclare(QUEUE_NAME, true, false, false, null);
 
         String message = "hello world!";
