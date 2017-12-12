@@ -1,0 +1,17 @@
+.settings/
+target
+log
+.idea/
+.classpath
+.project
+.metadata
+RemoteSystemsTempFiles
+*.iml
+*.log
+logs
+.DS_Store
+.vscode/*
+
+cms/frontend/dist/*
+dist.zip
+cms/frontend/src/utils/config.jsn-place
